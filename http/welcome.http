@@ -1,0 +1,14 @@
+### get welcome
+GET http://localhost:8080/welcome
+
+### get token
+GET http://localhost:8080/token
+
+> {% //response handler
+client.global.set("token", response.body);
+client.log("token : " + client.global.get("token"));
+%}
+
+### auth
+GET http://localhost:8080/auth
+http-token: {{token}}
