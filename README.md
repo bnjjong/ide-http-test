@@ -2,7 +2,7 @@
 
 # Synopsis
 
-API 를 테스트 할 때 기본적으로 `브라우저`에서 테스트 할 수 있다. GET의 경우에는 손쉽게 테스트를 할 수 있지만 다른 Method 예를 들어 `POST`를 테스트 해야 한다면 아마 주로 `Postman`을 많이 사용할 것이다. `IntelliJ` 에서 제공하는 `Http Client`를 사용하게 되면 여러 도구를 돌아다니지 않고 `**IDE 툴 내에서 바로 테스트**`가 가능하다. 그리고 매우 높은 수준의 테스트도 가능하다.  이를 활용하는 방법에 대해서 알아 보자.
+API 를 테스트 할 때 기본적으로 `브라우저`에서 테스트 할 수 있다. GET의 경우에는 손쉽게 테스트를 할 수 있지만 다른 Method 예를 들어 `POST`를 테스트 해야 한다면 아마 주로 `Postman`을 많이 사용할 것이다. `IntelliJ` 에서 제공하는 `Http Client`를 사용하게 되면 여러 도구를 돌아다니지 않고 `IDE 툴 내에서 바로 테스트`가 가능하다. 그리고 매우 높은 수준의 테스트도 가능하다.  이를 활용하는 방법에 대해서 알아 보자.
 
 # Goal
 
@@ -18,7 +18,7 @@ API 를 테스트 할 때 기본적으로 `브라우저`에서 테스트 할 수
 - spring boot 2.7
 - java 17
 
-매우 간단한 Api 소스이다. 이 로직을 실제 프로젝트에 사용하는 것은 `**매우 위험**`하다. 실습용으로 이해하자.
+매우 간단한 Api 소스이다. 이 로직을 실제 프로젝트에 사용하는 것은 `매우 위험`하다. 실습용으로 이해하자.
 
 ```java
 @RestController
@@ -60,16 +60,15 @@ public class TestApi {
 3. 발급된 토큰이 있는지 확인 (인증)
 4. 토큰 없을 경우 인증 실패
 
-자 여기까지 했다면 [Goal](https://www.notion.so/IntelliJ-http-client-1-aea41e8d71f7414d9cd00e7e03605766) 에서 3번까지는 구현이 완료가 되었다.
+자 여기까지 했다면 [Goal](#Goal) 에서 3번까지는 구현이 완료가 되었다.
 
 # Api test
 
 Http Client를 이용하여 Api 테스트를 구현해 보자. 아래처럼 http 폴더를 생성하고 welcome.http 파일을 생성한다.
-![](doc/git1.gif)
+![](doc/cap1.png)
 
 아래와 같이 작성해주고 실행을 시켜 보자.
-
-![화면 기록 2022-06-12 오후 12.07.11.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7d6cb8d3-b4b9-4958-a21d-7580ce189ba2/화면_기록_2022-06-12_오후_12.07.11.gif)
+![](doc/git1.gif)
 
 ```
 ### get welcome
@@ -77,12 +76,13 @@ GET http://localhost:8080/welcome
 ```
 
 아래와 같이 200 호출이 되고 welcome my homepage 이라고 return이 되었다면 정상적으로 테스트가 된 것이다.
-![](doc/gif2.gif)
+![](doc/cap2.png)
+
 
 ## Token 으로 인증하기
 
 자 이제 위에서 설명한 것과 같이 토큰을 전달 받아서 인증이 필요한 api 도 호출을 해보자.
-![](doc/gif3.gif)
+![](doc/gif2.gif)
 
 ```
 ### get token
@@ -103,21 +103,22 @@ http-token: cee7ba56-a9b7-4c1b-b19b-ebbaa7d4e016
 ### get token
 GET http://localhost:8080/token
 
-**> {% //response handler
+> {% //response handler
 client.global.set("token", response.body); // (1)
 client.log("token : " + client.global.get("token")); // (2)
-%}**
+%}
 
 ### auth
 GET http://localhost:8080/auth
-http-token: **{{token}} // (3)**
+http-token: {{token}} // (3)
 ```
 
 1. response로 받아온 token 을 global 변수에 token 이라는 이름으로 저장한다.
 2. token을 출력해 본다.
 3. global 변수에 저장된 token 값을 가져와 http-token 변수에 값을 넣어 준다.
 
-![화면 기록 2022-06-12 오후 12.27.24.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/64f08517-058d-4284-9cad-aca1858604bf/화면_기록_2022-06-12_오후_12.27.24.gif)
+![](doc/gif3.gif)
+
 
 # Conclusion
 
