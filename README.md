@@ -1,5 +1,8 @@
 # IntelliJ http client 활용 하기
 
+[![Written in Java](https://img.shields.io/static/v1?message=Jdk17&labelColor=5c5c5c&color=FF7800&logoColor=white&label=%20&logo=Java)](https://jdk.java.net/17/release-notes)
+[![Written in spring](https://img.shields.io/static/v1?message=SpringBoot-2.7.0&labelColor=5c5c5c&color=6DB33F&logoColor=white&label=%20&logo=SpringBoot)](https://spring.io/projects/spring-boot)
+
 # Synopsis
 
 API 를 테스트 할 때 기본적으로 `브라우저`에서 테스트 할 수 있다. GET의 경우에는 손쉽게 테스트를 할 수 있지만 다른 Method 예를 들어 `POST`를 테스트 해야 한다면 아마 주로 `Postman`을 많이 사용할 것이다. `IntelliJ` 에서 제공하는 `Http Client`를 사용하게 되면 여러 도구를 돌아다니지 않고 `IDE 툴 내에서 바로 테스트`가 가능하다. 그리고 매우 높은 수준의 테스트도 가능하다.  이를 활용하는 방법에 대해서 알아 보자.
